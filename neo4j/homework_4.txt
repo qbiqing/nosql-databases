@@ -1,7 +1,183 @@
-// The scenario you have used for your schema is:
+//README:
+//Biqing Qiu bq2134
+//This series of commands create a map of the character relationships between 8 characters 
+//from the show Game of Thrones.
+//There are 8 characters created, with more than 12 relationships between them. 
+//There are also 2 queries for a subgraph. One query returns all the SISTER_OF relationships in the graph. 
+//The other query returns all the BROTHER_OF relationships in the graph, 
+//with the siblings of this brother grouped in a collect() function. 
 
 
 // This is an example. Your own commands should *not* be commented out so we can pipe the file into the cypher-shell.
 // If you'd like to test your commands, you can run 'cat homework_4.txt | cypher-shell -u neo4j -p test' from
 // the vagrant box command line. Make sure neo4j is running first.
 // CREATE (a:person { name: 't' });
+
+
+//Creating nodes
+CREATE(Cersei:Player{name:"Cersei Lannister"});
+CREATE(Jaime:Player{name:"Jaime Lannister"});
+CREATE(Tyrion:Player{name:"Tyrion Lannister"});
+CREATE(Brienne:Player{name:"Brienne of Tarth"});
+CREATE(Daenerys:Player{name:"Daenerys Targaryen"});
+CREATE(Jon:Player{name:"Jon Snow"});
+CREATE(Sansa:Player{name:"Sansa Stark"});
+CREATE(Rhaegar:Player{name:"Rhaegar Targaryen"});
+MATCH (n) RETURN n;
+
+
+//creating relationships
+MATCH (a), (b)
+   WHERE a.name = 'Cersei Lannister' AND b.name = 'Jaime Lannister'
+   CREATE (a)-[r:SISTER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Cersei Lannister' AND b.name = 'Tyrion Lannister'
+   CREATE (a)-[r:SISTER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Cersei Lannister' AND b.name = 'Jaime Lannister'
+   CREATE (a)-[r:LOVER_OF {since: 'season_1'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Cersei Lannister' AND b.name = 'Daenerys Targaryen'
+   CREATE (a)-[r:ENEMY_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jaime Lannister' AND b.name = 'Cersei Lannister'
+   CREATE (a)-[r:LOVER_OF {since: 'season_1'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jaime Lannister' AND b.name = 'Cersei Lannister'
+   CREATE (a)-[r:BROTHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jaime Lannister' AND b.name = 'Tyrion Lannister'
+   CREATE (a)-[r:BROTHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jaime Lannister' AND b.name = 'Brienne of Tarth'
+   CREATE (a)-[r:ROMANTIC_INTEREST{since: 'season_3'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Tyrion Lannister' AND b.name = 'Jaime Lannister'
+   CREATE (a)-[r:BROTHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Tyrion Lannister' AND b.name = 'Cersei Lannister'
+   CREATE (a)-[r:BROTHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Tyrion Lannister' AND b.name = 'Daenerys Targaryen'
+   CREATE (a)-[r:HAND_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Tyrion Lannister' AND b.name = 'Sansa Stark'
+   CREATE (a)-[r:EX_HUSBAND_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Tyrion Lannister' AND b.name = 'Jon Snow'
+   CREATE (a)-[r:FRIEND_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Sansa Stark' AND b.name = 'Tyrion Lannister'
+   CREATE (a)-[r:EX_WIFE_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Sansa Stark' AND b.name = 'Jon Snow'
+   CREATE (a)-[r:SISTER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Sansa Stark' AND b.name = 'Brienne of Tarth'
+   CREATE (a)-[r:LADY_OF {since: 'season_4'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Brienne of Tarth' AND b.name = 'Sansa Stark'
+   CREATE (a)-[r:GUARD_OF {since: 'season_4'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Brienne of Tarth' AND b.name = 'Jaime Lannister'
+   CREATE (a)-[r:ROMANTIC_INTEREST {since: 'season_3'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Daenerys Targaryen' AND b.name = 'Tyrion Lannister'
+   CREATE (a)-[r:QUEEN_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Daenerys Targaryen' AND b.name = 'Cersei Lannister'
+   CREATE (a)-[r:ENEMY_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Daenerys Targaryen' AND b.name = 'Jon Snow'
+   CREATE (a)-[r:QUEEN_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Daenerys Targaryen' AND b.name = 'Jon Snow'
+   CREATE (a)-[r:LOVER_OF{since: 'season_7'}]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Daenerys Targaryen' AND b.name = 'Rhaegar Targaryen'
+   CREATE (a)-[r:SISTER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Rhaegar Targaryen' AND b.name = 'Daenerys Targaryen'
+   CREATE (a)-[r:BROTHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Rhaegar Targaryen' AND b.name = 'Jon Snow'
+   CREATE (a)-[r:FATHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jon Snow' AND b.name = 'Rhaegar Targaryen'
+   CREATE (a)-[r:SON_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jon Snow' AND b.name = 'Sansa Stark'
+   CREATE (a)-[r:BROTHER_OF]->(b)
+   RETURN type(r);
+
+MATCH (a), (b)
+   WHERE a.name = 'Jon Snow' AND b.name = 'Tyrion Lannister'
+   CREATE (a)-[r:FRIEND_OF]->(b)
+   RETURN type(r);
+
+//subgraph queries
+MATCH (a), (b)
+   WHERE a.name = 'Jon Snow' AND b.name = 'Daenerys Targaryen'
+   CREATE (a)-[r:LOVER_OF{since: 'season_7'}]->(b)
+   RETURN type(r);
+
+MATCH (p: Player)-[:BROTHER_OF]->(f:Player)
+    RETURN p, collect(f.name);
+
+
+
+
+
+
