@@ -13,9 +13,9 @@ mongo
 	link:"#", 
 	poster: "user1", 
 	time:"2018-06-19",
-	votesno: "2",
+	votesno: 2,
 	votes: ["user2", "user3"], 
-	commentsno: "2", 
+	commentsno: 2, 
 	comments:[{
 			userid:"user2", 
 			comment: "hi"},
@@ -32,9 +32,9 @@ mongo
 	link:"#", 
 	poster: "user2", 
 	time:"2018-07-19",
-	votesno: "1",
+	votesno: 1,
 	votes: ["user3"], 
-	commentsno: "1", 
+	commentsno: 1, 
 	comments:[
 			{userid:"user3", 
 			comment: "hello"}
@@ -48,9 +48,9 @@ mongo
 	link:"#", 
 	poster: "user3", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -61,9 +61,9 @@ mongo
 	link:"#", 
 	poster: "user1", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -74,9 +74,9 @@ mongo
 	link:"#", 
 	poster: "user1", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -87,9 +87,9 @@ mongo
 	link:"#", 
 	poster: "user1", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -100,9 +100,9 @@ mongo
 	link:"#", 
 	poster: "user2", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno:0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -113,9 +113,9 @@ mongo
 	link:"#", 
 	poster: "user2", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -126,9 +126,9 @@ mongo
 	link:"#", 
 	poster: "user2", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -139,9 +139,9 @@ mongo
 	link:"#", 
 	poster: "user2", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -152,9 +152,9 @@ mongo
 	link:"#", 
 	poster: "user3", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -165,9 +165,9 @@ mongo
 	link:"#", 
 	poster: "user3", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -178,9 +178,9 @@ mongo
 	link:"#", 
 	poster: "user3", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -191,9 +191,9 @@ mongo
 	link:"#", 
 	poster: "user3", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno:0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
@@ -204,21 +204,12 @@ mongo
 	link:"#", 
 	poster: "user3", 
 	time:"2018-08-19",
-	votesno: "0",
+	votesno: 0,
 	votes: [], 
-	commentsno: "0", 
+	commentsno: 0, 
 	comments:[]
 	}
 )
-
-
-
-
-
-
-
-
-
 
 
 

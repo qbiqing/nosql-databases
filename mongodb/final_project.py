@@ -25,6 +25,7 @@ from pymongo import MongoClient
 from pprint import pprint
 
 db = MongoClient("mongodb://localhost").finalproj
+
 # Action 1: User posts an article
 db.Articles.insert_one(
 {
@@ -33,9 +34,9 @@ db.Articles.insert_one(
 	"link":"#", 
 	"poster": "user1", 
 	"time":"2018-08-19",
-	"votesno": "0",
+	"votesno": 0,
 	"votes": [], 
-	"commentsno": "0", 
+	"commentsno": 0, 
 	"comments":[]
 	}
 )
@@ -46,11 +47,12 @@ db.Users.update(
 
 # Action 2: Display list of top 3 articles based on votes
 cursor1 = db.Articles.aggregate(
-[{"$sort":{"votesno": {"$meta": "textScore"}}},
+[{"$sort":{"votesno": -1}},
 {"$limit": 3}
 ])
 for document in cursor1:
 	pprint(document)
+
 
 # Action 3: User upvotes an article
 db.Users.update(
@@ -59,8 +61,9 @@ db.Users.update(
 )
 db.Articles.update(
 	{"articleid": "article16"},
-	{"$push":{"votes": "user1"} }, 
-	{"$inc": {"votesno":"1"}}
+	{"$push":{"votes": "user1"} , 
+	"$inc": {"votesno": 1}  },
+	True
 )
 
 # Action 4: User comments on article
@@ -70,8 +73,9 @@ db.Users.update(
 )
 db.Articles.update(
 	{"articleid": "article15"},
-	{"$push":{"comments": {"user1", "hi"}} },
-	{"$inc": {"commentsno": "1"}}
+	{"$push":{"comments": {"userid":"user1", "comment":"hi"}} ,
+	"$inc": {"commentsno": 1}},
+	True
 )
 
 # Action 5: User edits the title, link of an article posted
@@ -90,7 +94,7 @@ db.Users.update(
 commenters = []
 cursor2 = db.Users.find({"commented": "article13"})
 for document in cursor2:
-	commenters.append(document.id)
+	commenters.append(document["id"])
 for commenter in commenters:
 	db.Users.update(
 		{"id": commenter},
@@ -100,7 +104,7 @@ for commenter in commenters:
 voters = []
 cursor3 = db.Users.find({"voted": "article13"})
 for document in cursor3:
-	voters.append(document.id)
+	voters.append(document["id"])
 for voter in voters:
 	db.Users.update(
 		{"id": voter},
@@ -110,36 +114,26 @@ for voter in voters:
 # Action 7: User removes a vote
 db.Articles.update(
 	{"articleid": "article1"},
-	{"$inc":{"votesno": "-1"}},
-	{"$pull": {"votes": "user2"}}
+	{"$inc":{"votesno": -1},
+	"$pull": {"votes": "user2"}},
+	True
 )
 db.Users.update(
 	{"id": "user2"},
-	{"$pull":{"voted": "article1"} })
+	{"$pull":{"voted": "article1"} },
+	True)
 
 # Action 8: User removes a comment
 db.Articles.update(
 	{"articleid": "article1"},
-	{"$inc":{"commentsno": "-1"}},
-	{"$pull": {"comments": "user2"}}
+	{"$inc":{"commentsno": -1},
+	"$pull": {"comments":
+		 {"userid": "user2","comment":"hi"}
+	}},
+	True
 )
 db.Users.update(
 	{"id": "user2"},
-	{"$pull":{"commented": "article1"} })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	{"$pull":{"commented": "article1"} },
+	True)
 
