@@ -1,5 +1,4 @@
-# No skeleton was provided for this part
-# So I wrote my own 
+# Script to add users and objects
 # Biqing Qiu
 # bq2134
 
